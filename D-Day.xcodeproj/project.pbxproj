@@ -15,6 +15,13 @@
 		BCF72DA719FFB87500C29974 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCF72DA619FFB87500C29974 /* Images.xcassets */; };
 		BCF72DAA19FFB87500C29974 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BCF72DA819FFB87500C29974 /* LaunchScreen.xib */; };
 		BCF72DB619FFB87500C29974 /* D_DayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF72DB519FFB87500C29974 /* D_DayTests.swift */; };
+		BCF72DC019FFC08700C29974 /* CalendarEventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF72DBF19FFC08700C29974 /* CalendarEventListViewController.swift */; };
+		BCF72E2D19FFC7FC00C29974 /* AddDdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF72E2C19FFC7FC00C29974 /* AddDdayViewController.swift */; };
+		BCF72E3519FFCAD400C29974 /* KeyValueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF72E3419FFCAD400C29974 /* KeyValueCell.swift */; };
+		BCF72E3719FFCAE000C29974 /* DatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF72E3619FFCAE000C29974 /* DatePickerCell.swift */; };
+		BCF72E3919FFCAED00C29974 /* TextInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF72E3819FFCAED00C29974 /* TextInputCell.swift */; };
+		BCF72E3B19FFCAFB00C29974 /* TextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF72E3A19FFCAFB00C29974 /* TextViewCell.swift */; };
+		BCF72E3D19FFCB0800C29974 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF72E3C19FFCB0800C29974 /* ButtonCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +47,13 @@
 		BCF72DAF19FFB87500C29974 /* D-DayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "D-DayTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCF72DB419FFB87500C29974 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BCF72DB519FFB87500C29974 /* D_DayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = D_DayTests.swift; sourceTree = "<group>"; };
+		BCF72DBF19FFC08700C29974 /* CalendarEventListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarEventListViewController.swift; sourceTree = "<group>"; };
+		BCF72E2C19FFC7FC00C29974 /* AddDdayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDdayViewController.swift; sourceTree = "<group>"; };
+		BCF72E3419FFCAD400C29974 /* KeyValueCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyValueCell.swift; sourceTree = "<group>"; };
+		BCF72E3619FFCAE000C29974 /* DatePickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerCell.swift; sourceTree = "<group>"; };
+		BCF72E3819FFCAED00C29974 /* TextInputCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputCell.swift; sourceTree = "<group>"; };
+		BCF72E3A19FFCAFB00C29974 /* TextViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewCell.swift; sourceTree = "<group>"; };
+		BCF72E3C19FFCB0800C29974 /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +99,9 @@
 				BCF72D9F19FFB87500C29974 /* MasterViewController.swift */,
 				BCF72DA119FFB87500C29974 /* DetailViewController.swift */,
 				BCF72DA319FFB87500C29974 /* Main.storyboard */,
+				BCF72E2C19FFC7FC00C29974 /* AddDdayViewController.swift */,
+				BCF72E3E19FFCB0F00C29974 /* Cells */,
+				BCF72DBF19FFC08700C29974 /* CalendarEventListViewController.swift */,
 				BCF72DA619FFB87500C29974 /* Images.xcassets */,
 				BCF72DA819FFB87500C29974 /* LaunchScreen.xib */,
 				BCF72D9C19FFB87500C29974 /* D_Day.xcdatamodeld */,
@@ -116,6 +133,18 @@
 				BCF72DB419FFB87500C29974 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BCF72E3E19FFCB0F00C29974 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				BCF72E3419FFCAD400C29974 /* KeyValueCell.swift */,
+				BCF72E3619FFCAE000C29974 /* DatePickerCell.swift */,
+				BCF72E3819FFCAED00C29974 /* TextInputCell.swift */,
+				BCF72E3A19FFCAFB00C29974 /* TextViewCell.swift */,
+				BCF72E3C19FFCB0800C29974 /* ButtonCell.swift */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,9 +248,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCF72D9B19FFB87500C29974 /* AppDelegate.swift in Sources */,
+				BCF72DC019FFC08700C29974 /* CalendarEventListViewController.swift in Sources */,
+				BCF72E2D19FFC7FC00C29974 /* AddDdayViewController.swift in Sources */,
+				BCF72E3719FFCAE000C29974 /* DatePickerCell.swift in Sources */,
 				BCF72D9E19FFB87500C29974 /* D_Day.xcdatamodeld in Sources */,
+				BCF72E3919FFCAED00C29974 /* TextInputCell.swift in Sources */,
 				BCF72DA019FFB87500C29974 /* MasterViewController.swift in Sources */,
+				BCF72E3B19FFCAFB00C29974 /* TextViewCell.swift in Sources */,
+				BCF72E3D19FFCB0800C29974 /* ButtonCell.swift in Sources */,
 				BCF72DA219FFB87500C29974 /* DetailViewController.swift in Sources */,
+				BCF72E3519FFCAD400C29974 /* KeyValueCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,6 +383,7 @@
 				INFOPLIST_FILE = "D-Day/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "67422e60-e82c-4560-b1da-dff8e40138a0";
 			};
 			name = Debug;
 		};
@@ -357,6 +394,7 @@
 				INFOPLIST_FILE = "D-Day/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "67422e60-e82c-4560-b1da-dff8e40138a0";
 			};
 			name = Release;
 		};
@@ -413,6 +451,7 @@
 				BCF72DBB19FFB87500C29974 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BCF72DBC19FFB87500C29974 /* Build configuration list for PBXNativeTarget "D-DayTests" */ = {
 			isa = XCConfigurationList;
@@ -421,6 +460,7 @@
 				BCF72DBE19FFB87500C29974 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
