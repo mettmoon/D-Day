@@ -76,6 +76,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         }else if segue.identifier == "addNewItem"{
             let viewController = (segue.destinationViewController as UINavigationController).topViewController as AddDdayViewController
             viewController.delegate = self
+            viewController.managedObjectContext = managedObjectContext
         }
     }
 
@@ -118,7 +119,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject
-        cell.textLabel.text = object.valueForKey("title")!.stringValue
+        cell.textLabel.text = object.valueForKey("title")? as? String
     }
 
     // MARK: - Fetched results controller
