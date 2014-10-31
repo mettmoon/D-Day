@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BCF288D21A03DB7A00898EC4 /* DDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF288D11A03DB7A00898EC4 /* DDayCell.swift */; };
 		BCF72D9B19FFB87500C29974 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF72D9A19FFB87500C29974 /* AppDelegate.swift */; };
 		BCF72D9E19FFB87500C29974 /* D_Day.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BCF72D9C19FFB87500C29974 /* D_Day.xcdatamodeld */; };
 		BCF72DA019FFB87500C29974 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF72D9F19FFB87500C29974 /* MasterViewController.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BCF288D11A03DB7A00898EC4 /* DDayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDayCell.swift; sourceTree = "<group>"; };
 		BCF72D9519FFB87500C29974 /* D-Day.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "D-Day.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCF72D9919FFB87500C29974 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BCF72D9A19FFB87500C29974 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 		BCF72E3E19FFCB0F00C29974 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				BCF288D11A03DB7A00898EC4 /* DDayCell.swift */,
 				BCF72E3419FFCAD400C29974 /* KeyValueCell.swift */,
 				BCF72E3619FFCAE000C29974 /* DatePickerCell.swift */,
 				BCF72E3819FFCAED00C29974 /* TextInputCell.swift */,
@@ -250,6 +253,7 @@
 				BCF72D9B19FFB87500C29974 /* AppDelegate.swift in Sources */,
 				BCF72DC019FFC08700C29974 /* CalendarEventListViewController.swift in Sources */,
 				BCF72E2D19FFC7FC00C29974 /* AddDdayViewController.swift in Sources */,
+				BCF288D21A03DB7A00898EC4 /* DDayCell.swift in Sources */,
 				BCF72E3719FFCAE000C29974 /* DatePickerCell.swift in Sources */,
 				BCF72D9E19FFB87500C29974 /* D_Day.xcdatamodeld in Sources */,
 				BCF72E3919FFCAED00C29974 /* TextInputCell.swift in Sources */,

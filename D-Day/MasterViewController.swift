@@ -14,7 +14,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
 
-
     override func awakeFromNib() {
         super.awakeFromNib()
         if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
@@ -23,6 +22,11 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         }
     }
 
+    func stringFromDate(date:NSDate) -> String{
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy. MM. dd."
+        return dateFormatter.stringFromDate(date)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -92,7 +96,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("DDayCell", forIndexPath: indexPath) as UITableViewCell
         self.configureCell(cell, atIndexPath: indexPath)
         return cell
     }
@@ -116,10 +120,34 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             }
         }
     }
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 89
+    }
 
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject
-        cell.textLabel.text = object.valueForKey("title")? as? String
+        if let cell = cell as? DDayCell {
+            cell.titleLabel.text = object.valueForKey("title")? as? String
+            cell.dateLabel.text = stringFromDate(object.valueForKey("date") as NSDate)
+            let currnetCalendar = NSCalendar.currentCalendar()
+            
+            var targetDate:NSDate
+            if let event = object.valueForKey("showEvent")? as? NSManagedObject {
+                targetDate = event.valueForKey("date")? as NSDate
+            }else{
+                targetDate = object.valueForKey("date")? as NSDate
+            }
+            let date = targetDate
+            let gap = targetDate.timeIntervalSinceDate(NSDate())
+            let toDate = NSDate()
+
+            let todayDateComponents = currnetCalendar.components(NSCalendarUnit.DayCalendarUnit, fromDate: targetDate, toDate: toDate, options: NSCalendarOptions.allZeros)
+            if todayDateComponents.day > 0 {
+                cell.ddayLabel.text = "D+\(todayDateComponents.day)"
+            } else {
+                cell.ddayLabel.text = "D\(todayDateComponents.day)"
+            }
+        }
     }
 
     // MARK: - Fetched results controller
