@@ -320,7 +320,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Master" id="Zdf-7t-Un8"/>
                     <connections>
-                        <segue destination="1dg-gT-bIF" kind="presentation" identifier="addNewItem" id="XGO-Qc-dgZ"/>
+                        <segue destination="1dg-gT-bIF" kind="presentation" identifier="addNewItem" modalPresentationStyle="formSheet" id="ckh-Bv-TsW"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
@@ -329,6 +329,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="se9-Ya-eWI"/>
+        <segue reference="ckh-Bv-TsW"/>
     </inferredMetricsTieBreakers>
 </document>

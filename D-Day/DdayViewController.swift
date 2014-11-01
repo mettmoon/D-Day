@@ -58,23 +58,27 @@ class DdayViewController: UITableViewController, UITextViewDelegate, UITextField
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        eventArray = NSMutableArray()
-        if let managedObject = detailItem{
-            date = managedObject.valueForKey("date") as? NSDate
-            let set = managedObject.mutableSetValueForKey("event")
-            if set.count > 0{
-                eventArray.addObjectsFromArray(set.allObjects)
-            }
-            memo = managedObject.valueForKey("memo") as? String
-            subject = managedObject.valueForKey("title") as? String
-        }else{
-            date = NSDate()
-            let addBarButton = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Bordered, target: self, action: "addButtonAction:")
-            self.navigationItem.setRightBarButtonItem(addBarButton, animated: false)
-            let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancelButtonAction:")
-            self.navigationItem.setLeftBarButtonItem(cancelButton, animated: false)
+        if managedObjectContext != nil {
             
+            eventArray = NSMutableArray()
+            if let managedObject = detailItem{
+                date = managedObject.valueForKey("date") as? NSDate
+                let set = managedObject.mutableSetValueForKey("event")
+                if set.count > 0{
+                    eventArray.addObjectsFromArray(set.allObjects)
+                }
+                memo = managedObject.valueForKey("memo") as? String
+                subject = managedObject.valueForKey("title") as? String
+            }else{
+                date = NSDate()
+                let addBarButton = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Bordered, target: self, action: "addButtonAction:")
+                self.navigationItem.setRightBarButtonItem(addBarButton, animated: false)
+                let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancelButtonAction:")
+                self.navigationItem.setLeftBarButtonItem(cancelButton, animated: false)
+                
+            }
         }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -85,7 +89,11 @@ class DdayViewController: UITableViewController, UITextViewDelegate, UITextField
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 4
+        if managedObjectContext != nil {
+            return 4
+        }else{
+            return 0
+        }
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
