@@ -244,6 +244,7 @@ class DdayViewController: UITableViewController, UITextViewDelegate, UITextField
             }else{
                 let cell = tableView.dequeueReusableCellWithIdentifier("ButtonCell") as ButtonCell
                 cell.buttonLabel.text = "Add Event.."
+                cell.buttonLabel.textColor = tableView.tintColor
                 return cell
             }
         case 3:
