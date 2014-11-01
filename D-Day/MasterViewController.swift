@@ -9,9 +9,9 @@
 import UIKit
 import CoreData
 
-class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate, AddDdayViewControllerDelegate {
+class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate, DdayViewControllerDelegate {
 
-    var detailViewController: DetailViewController? = nil
+    var detailViewController: DdayViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
 
     override func awakeFromNib() {
@@ -36,7 +36,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         self.navigationItem.rightBarButtonItem = addButton
         if let split = self.splitViewController {
             let controllers = split.viewControllers
-            self.detailViewController = controllers[controllers.count-1].topViewController as? DetailViewController
+            self.detailViewController = controllers[controllers.count-1].topViewController as? DdayViewController
         }
     }
 
@@ -72,13 +72,14 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow() {
             let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject
-                let controller = (segue.destinationViewController as UINavigationController).topViewController as DetailViewController
+                let controller = (segue.destinationViewController as UINavigationController).topViewController as DdayViewController
                 controller.detailItem = object
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
                 controller.navigationItem.leftItemsSupplementBackButton = true
+                controller.managedObjectContext = managedObjectContext
             }
         }else if segue.identifier == "addNewItem"{
-            let viewController = (segue.destinationViewController as UINavigationController).topViewController as AddDdayViewController
+            let viewController = (segue.destinationViewController as UINavigationController).topViewController as DdayViewController
             viewController.delegate = self
             viewController.managedObjectContext = managedObjectContext
         }
@@ -128,24 +129,29 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject
         if let cell = cell as? DDayCell {
             cell.titleLabel.text = object.valueForKey("title")? as? String
-            cell.dateLabel.text = stringFromDate(object.valueForKey("date") as NSDate)
             let currnetCalendar = NSCalendar.currentCalendar()
             
             var targetDate:NSDate
+            var eventName = "D"
             if let event = object.valueForKey("showEvent")? as? NSManagedObject {
+                eventName = event.valueForKey("title")? as String
                 targetDate = event.valueForKey("date")? as NSDate
             }else{
                 targetDate = object.valueForKey("date")? as NSDate
             }
+            cell.dateLabel.text = stringFromDate(targetDate)
+
             let date = targetDate
             let gap = targetDate.timeIntervalSinceDate(NSDate())
             let toDate = NSDate()
 
             let todayDateComponents = currnetCalendar.components(NSCalendarUnit.DayCalendarUnit, fromDate: targetDate, toDate: toDate, options: NSCalendarOptions.allZeros)
-            if todayDateComponents.day > 0 {
-                cell.ddayLabel.text = "D+\(todayDateComponents.day)"
+            if todayDateComponents.day == 0 {
+                cell.ddayLabel.text = "D-Day!"
+            }else if todayDateComponents.day > 0 {
+                cell.ddayLabel.text = "\(eventName)+\(todayDateComponents.day)"
             } else {
-                cell.ddayLabel.text = "D\(todayDateComponents.day)"
+                cell.ddayLabel.text = "\(eventName)\(todayDateComponents.day)"
             }
         }
     }
@@ -233,12 +239,12 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
      }
      */
 
-    // MARK: - AddDdayViewControllerDelegate
-    func addDdayViewControllerDidCancel(viewController: AddDdayViewController) {
+    // MARK: - DdayViewControllerDelegate
+    func ddayViewControllerDidCancel(viewController: DdayViewController) {
         viewController.dismissViewControllerAnimated(true, completion: nil)
         
     }
-    func addDdayViewController(viewController: AddDdayViewController, didCreateItem: AnyObject) {
+    func ddayViewController(viewController: DdayViewController, didCreateItem: AnyObject) {
         viewController.dismissViewControllerAnimated(true, completion: nil)
     }
 }

@@ -4,18 +4,18 @@
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="memo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="dday" inverseEntity="Event" syncable="YES"/>
+        <relationship name="event" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="dday" inverseEntity="Event" syncable="YES"/>
         <relationship name="showEvent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="showedDday" inverseEntity="Event" syncable="YES"/>
     </entity>
     <entity name="Event">
         <attribute name="timeGap" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="dday" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DDay" inverseName="events" inverseEntity="DDay" syncable="YES"/>
+        <relationship name="dday" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DDay" inverseName="event" inverseEntity="DDay" syncable="YES"/>
         <relationship name="showedDday" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DDay" inverseName="showEvent" inverseEntity="DDay" syncable="YES"/>
         <userInfo/>
     </entity>
     <elements>
-        <element name="DDay" positionX="261" positionY="198" width="128" height="118"/>
+        <element name="DDay" positionX="261" positionY="198" width="128" height="120"/>
         <element name="Event" positionX="261" positionY="189" width="128" height="103"/>
     </elements>
 </model>
