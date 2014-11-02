@@ -38,8 +38,29 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             let controllers = split.viewControllers
             self.detailViewController = controllers[controllers.count-1].topViewController as? DdayViewController
         }
+        
+        
+        NSNotificationCenter.defaultCenter().addObserver(self,
+            selector: "reloadFetchedResults:",
+            name: "SomethingChanged",
+            object: UIApplication.sharedApplication().delegate
+        )
+    }
+    override func viewDidAppear(animated: Bool) {
+        performFetch()
+    }
+    func reloadFetchedResults(note:NSNotification) {
+    NSLog("Underlying data changed ... refreshing!")
+        self.performFetch()
     }
 
+    func performFetch() {
+        var error:NSError? = nil
+        self.fetchedResultsController.performFetch(&error)
+        if let error = error {
+            NSLog("[%@ %@] %@ (%@)", NSStringFromClass(self.classForCoder), __FUNCTION__, error.localizedDescription, error.localizedFailureReason!)
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -48,22 +69,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     func insertNewObject(sender: AnyObject) {
         performSegueWithIdentifier("addNewItem", sender: nil)
         return
-        let context = self.fetchedResultsController.managedObjectContext
-        let entity = self.fetchedResultsController.fetchRequest.entity!
-        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context) as NSManagedObject
-             
-        // If appropriate, configure the new managed object.
-        // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-        newManagedObject.setValue(NSDate(), forKey: "date")
-             
-        // Save the context.
-        var error: NSError? = nil
-        if !context.save(&error) {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            //println("Unresolved error \(error), \(error.userInfo)")
-            abort()
-        }
     }
 
     // MARK: - Segues

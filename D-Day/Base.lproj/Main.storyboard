@@ -103,7 +103,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="IVb-SJ-6GS">
-                                            <rect key="frame" x="8" y="0.0" width="584" height="162"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="162"/>
                                             <date key="date" timeIntervalSinceReferenceDate="436193591.16894299">
                                                 <!--2014-10-28 12:53:11 +0000-->
                                             </date>
@@ -111,16 +111,28 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="IVb-SJ-6GS" firstAttribute="leading" secondItem="ZIf-xd-7ld" secondAttribute="leadingMargin" id="6cD-xC-Q3V"/>
+                                        <constraint firstAttribute="bottom" secondItem="IVb-SJ-6GS" secondAttribute="bottom" id="Fos-lL-DK8"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="IVb-SJ-6GS" secondAttribute="trailing" id="NWf-lx-SKv"/>
+                                        <constraint firstItem="IVb-SJ-6GS" firstAttribute="top" secondItem="ZIf-xd-7ld" secondAttribute="top" id="On4-9Q-Rbc"/>
                                         <constraint firstItem="IVb-SJ-6GS" firstAttribute="top" secondItem="ZIf-xd-7ld" secondAttribute="topMargin" id="aj9-BQ-qbT"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="IVb-SJ-6GS" secondAttribute="bottom" id="oRi-ml-lWF"/>
+                                        <constraint firstAttribute="trailing" secondItem="IVb-SJ-6GS" secondAttribute="trailing" id="pki-BB-B0U"/>
+                                        <constraint firstItem="IVb-SJ-6GS" firstAttribute="leading" secondItem="ZIf-xd-7ld" secondAttribute="leading" id="q10-Vd-pod"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="6cD-xC-Q3V"/>
+                                            <exclude reference="NWf-lx-SKv"/>
+                                            <exclude reference="aj9-BQ-qbT"/>
+                                            <exclude reference="oRi-ml-lWF"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="datePicker" destination="IVb-SJ-6GS" id="vnF-Ae-fWF"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="KeyValueCell" id="u6N-7h-VR8" customClass="KeyValueCell" customModule="D_Day" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="KeyValueCell" id="u6N-7h-VR8" customClass="KeyValueCell" customModule="D_Day" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="u6N-7h-VR8" id="WkS-ID-CiT">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -132,7 +144,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="value" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cYB-WN-abE">
-                                            <rect key="frame" x="503" y="11" width="41" height="21"/>
+                                            <rect key="frame" x="536" y="11" width="41" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
@@ -235,7 +247,7 @@
                             <outlet property="delegate" destination="G4r-Dl-DDu" id="Xgz-yr-lzm"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="D-Day" id="A8g-ke-gD9"/>
+                    <navigationItem key="navigationItem" title="D-Day Detail" id="A8g-ke-gD9"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5QO-zC-P6e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -279,8 +291,8 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="{Date}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IoV-aH-cX5">
-                                            <rect key="frame" x="23" y="52" width="475" height="23"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="{Date}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IoV-aH-cX5">
+                                            <rect key="frame" x="23" y="52" width="478" height="23"/>
                                             <fontDescription key="fontDescription" name="Futura-CondensedExtraBold" family="Futura" pointSize="18"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
@@ -318,7 +330,7 @@
                             <outlet property="delegate" destination="7bK-jq-Zjz" id="RA6-mI-bju"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Master" id="Zdf-7t-Un8"/>
+                    <navigationItem key="navigationItem" title="D-Day" id="Zdf-7t-Un8"/>
                     <connections>
                         <segue destination="1dg-gT-bIF" kind="presentation" identifier="addNewItem" modalPresentationStyle="formSheet" id="ckh-Bv-TsW"/>
                     </connections>
@@ -329,7 +341,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ZEt-gC-HqK"/>
+        <segue reference="se9-Ya-eWI"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.85098046059999999" green="0.19215688110000001" blue="0.15686275059999999" alpha="1" colorSpace="deviceRGB"/>
 </document>

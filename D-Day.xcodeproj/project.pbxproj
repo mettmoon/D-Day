@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC8AAEE41A066300002B363E /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC8AAEE31A066300002B363E /* CloudKit.framework */; };
 		BCBA69021A04705200189A54 /* PickerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBA69011A04705200189A54 /* PickerViewCell.swift */; };
 		BCF288D21A03DB7A00898EC4 /* DDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF288D11A03DB7A00898EC4 /* DDayCell.swift */; };
 		BCF72D9B19FFB87500C29974 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF72D9A19FFB87500C29974 /* AppDelegate.swift */; };
@@ -36,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BC8AAEE21A066120002B363E /* D-Day.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "D-Day.entitlements"; sourceTree = "<group>"; };
+		BC8AAEE31A066300002B363E /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		BCBA69011A04705200189A54 /* PickerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewCell.swift; sourceTree = "<group>"; };
 		BCF288D11A03DB7A00898EC4 /* DDayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDayCell.swift; sourceTree = "<group>"; };
 		BCF72D9519FFB87500C29974 /* D-Day.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "D-Day.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC8AAEE41A066300002B363E /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +83,7 @@
 		BCF72D8C19FFB87500C29974 = {
 			isa = PBXGroup;
 			children = (
+				BC8AAEE31A066300002B363E /* CloudKit.framework */,
 				BCF72D9719FFB87500C29974 /* D-Day */,
 				BCF72DB219FFB87500C29974 /* D-DayTests */,
 				BCF72D9619FFB87500C29974 /* Products */,
@@ -97,6 +102,7 @@
 		BCF72D9719FFB87500C29974 /* D-Day */ = {
 			isa = PBXGroup;
 			children = (
+				BC8AAEE21A066120002B363E /* D-Day.entitlements */,
 				BCF72D9A19FFB87500C29974 /* AppDelegate.swift */,
 				BCF72D9F19FFB87500C29974 /* MasterViewController.swift */,
 				BCF72E2C19FFC7FC00C29974 /* DdayViewController.swift */,
@@ -199,6 +205,15 @@
 				TargetAttributes = {
 					BCF72D9419FFB87500C29974 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 9YGS892Y3B;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					BCF72DAE19FFB87500C29974 = {
 						CreatedOnToolsVersion = 6.1;
@@ -384,10 +399,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "D-Day/D-Day.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer: YOU SUNG MOON (A549YJG29K)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: YOU SUNG MOON (A549YJG29K)";
 				INFOPLIST_FILE = "D-Day/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "67422e60-e82c-4560-b1da-dff8e40138a0";
+				PROVISIONING_PROFILE = "fff9f4a3-d8e6-4578-bca7-49ec0b6f7715";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -396,10 +414,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "D-Day/D-Day.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "D-Day/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "67422e60-e82c-4560-b1da-dff8e40138a0";
+				PROVISIONING_PROFILE = "fff9f4a3-d8e6-4578-bca7-49ec0b6f7715";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

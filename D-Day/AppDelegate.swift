@@ -85,36 +85,111 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
         // Create the coordinator and store
         var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("D_Day.sqlite")
-        var error: NSError? = nil
-        var failureReason = "There was an error creating or loading the application's saved data."
-        if coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil, error: &error) == nil {
-            coordinator = nil
-            // Report any error we got.
-            let dict = NSMutableDictionary()
-            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
-            dict[NSLocalizedFailureReasonErrorKey] = failureReason
-            dict[NSUnderlyingErrorKey] = error
-            error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
-            // Replace this with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog("Unresolved error \(error), \(error!.userInfo)")
-            abort()
-        }
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+            // ** Note: if you adapt this code for your own use, you MUST change this variable:
+            let iCloudEnabledAppID = "9YGS892Y3B.iCloud.WEJOApps.D-Day"
+            
+            // ** Note: if you adapt this code for your own use, you should change this variable:
+            let dataFileName = "D_Day.sqlite"
+            
+            // ** Note: For basic usage you shouldn't need to change anything else
+            
+            let iCloudDataDirectoryName = "Data.nosync"
+            let iCloudLogsDirectoryName = "Logs"
+            let fileManager = NSFileManager.defaultManager()
+            let localStore = self.applicationDocumentsDirectory.URLByAppendingPathComponent(dataFileName)
+            
+            if let iCloud = fileManager.URLForUbiquityContainerIdentifier(nil) as NSURL! {
+                
+                NSLog("iCloud is working")
+                let pathString = (iCloud.path! as NSString).stringByAppendingPathComponent(iCloudLogsDirectoryName) as String!
+                let iCloudLogsPath:NSURL = NSURL(fileURLWithPath:pathString)!
+                NSLog("iCloudEnabledAppID = %@",iCloudEnabledAppID)
+                NSLog("dataFileName = %@", dataFileName)
+                NSLog("iCloudDataDirectoryName = %@", iCloudDataDirectoryName)
+                NSLog("iCloudLogsDirectoryName = %@", iCloudLogsDirectoryName)
+                NSLog("iCloud = %@", iCloud)
+                NSLog("iCloudLogsPath = %@", iCloudLogsPath)
+                if fileManager.fileExistsAtPath((iCloud.path! as NSString).stringByAppendingPathComponent(iCloudDataDirectoryName)) == false {
+                    var fileSystemError:NSError?
+                    let pathString2:String! = NSString(string: iCloud.path! ).stringByAppendingPathComponent(iCloudDataDirectoryName) as String
+                    fileManager.createDirectoryAtPath(pathString2, withIntermediateDirectories: true, attributes: nil, error: &fileSystemError)
+                    if let error = fileSystemError {
+                        NSLog("Error creating database directory %@", error)
+                    }
+                }
+                
+                let iCloudData = NSString(string:iCloud.path!).stringByAppendingPathComponent(iCloudDataDirectoryName).stringByAppendingPathComponent(dataFileName)
+                
+                
+                NSLog("iCloudData = %@", iCloudData)
+                
+                var options:NSMutableDictionary = NSMutableDictionary()
+                options.setObject(NSNumber(bool: true), forKey: NSMigratePersistentStoresAutomaticallyOption)
+                options.setObject(NSNumber(bool:true), forKey: NSInferMappingModelAutomaticallyOption)
+                options.setObject(iCloudEnabledAppID, forKey: NSPersistentStoreUbiquitousContentNameKey)
+                options.setObject(iCloudLogsPath, forKey: NSPersistentStoreUbiquitousContentURLKey)
+                
+                coordinator?.lock()
+                
+                coordinator?.addPersistentStoreWithType(NSSQLiteStoreType, configuration:nil, URL:NSURL(fileURLWithPath:iCloudData), options:options, error:nil)
+                
+                coordinator?.unlock()
+            }
+            else {
+                NSLog("iCloud is NOT working - using a local store")
+                var options:NSMutableDictionary = NSMutableDictionary()
+                options.setObject(NSNumber(bool: true), forKey:NSMigratePersistentStoresAutomaticallyOption)
+                options.setObject(NSNumber(bool: true), forKey:NSInferMappingModelAutomaticallyOption)
+                
+                coordinator?.lock()
+                
+                coordinator?.addPersistentStoreWithType(NSSQLiteStoreType, configuration:nil, URL:localStore, options:options, error:nil)
+                coordinator?.unlock()
+                
+            }
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                NSNotificationCenter.defaultCenter().postNotificationName("SomethingChanged", object:self, userInfo:nil)
+            });
+        });
+
         
         return coordinator
     }()
 
     lazy var managedObjectContext: NSManagedObjectContext? = {
         // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) This property is optional since there are legitimate error conditions that could cause the creation of the context to fail.
-        let coordinator = self.persistentStoreCoordinator
-        if coordinator == nil {
+        
+        if let coordinator = self.persistentStoreCoordinator {
+//            var managedObjectContext = NSManagedObjectContext()
+//            managedObjectContext.persistentStoreCoordinator = coordinator
+            
+            var managedObjectContext = NSManagedObjectContext(concurrencyType:NSManagedObjectContextConcurrencyType.MainQueueConcurrencyType)
+            managedObjectContext.performBlockAndWait({ () -> Void in
+                managedObjectContext.persistentStoreCoordinator = coordinator
+                NSNotificationCenter.defaultCenter().addObserver(self, selector:"mergeChangesFrom_iCloud:", name:NSPersistentStoreDidImportUbiquitousContentChangesNotification, object:coordinator)
+                })
+            self.managedObjectContext = managedObjectContext
+            return managedObjectContext
+        }else{
             return nil
         }
-        var managedObjectContext = NSManagedObjectContext()
-        managedObjectContext.persistentStoreCoordinator = coordinator
-        return managedObjectContext
     }()
+
+    
+    func mergeChangesFrom_iCloud(notification:NSNotification) {
+    
+        NSLog("Merging in changes from iCloud...")
+        
+        let moc:NSManagedObjectContext = self.managedObjectContext!
+    
+        moc.performBlockAndWait { () -> Void in
+            moc.mergeChangesFromContextDidSaveNotification(notification)
+            var refreshNotification:NSNotification = NSNotification(name: "SomethingChanged", object: self, userInfo: notification.userInfo)
+            NSNotificationCenter.defaultCenter().postNotification(refreshNotification)
+        }
+    }
 
     // MARK: - Core Data Saving support
 

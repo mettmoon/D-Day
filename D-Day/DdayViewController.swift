@@ -73,7 +73,7 @@ class DdayViewController: UITableViewController, UITextViewDelegate, UITextField
                 date = NSDate()
                 let addBarButton = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Bordered, target: self, action: "addButtonAction:")
                 self.navigationItem.setRightBarButtonItem(addBarButton, animated: false)
-                let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancelButtonAction:")
+                let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancelButtonActioewn:")
                 self.navigationItem.setLeftBarButtonItem(cancelButton, animated: false)
                 
             }
@@ -185,20 +185,27 @@ class DdayViewController: UITableViewController, UITextViewDelegate, UITextField
         
         switch indexPath.section {
         case 0:
-            let cell = tableView.dequeueReusableCellWithIdentifier("TextInputCell", forIndexPath: indexPath) as TextInputCell
-            cell.textField.placeholder = "Subject"
-            cell.textField.text = subject
-            cell.textField.delegate = self
-            cell.textField.returnKeyType = .Done
-            if self.detailItem == nil {
-                if isFirstViewDidAppear {
-                    cell.textField.becomeFirstResponder()
-                    isFirstViewDidAppear = false
+            if detailItem == nil {
+                let cell = tableView.dequeueReusableCellWithIdentifier("TextInputCell", forIndexPath: indexPath) as TextInputCell
+                cell.textField.placeholder = "Subject"
+                cell.textField.text = subject
+                cell.textField.delegate = self
+                cell.textField.returnKeyType = .Done
+                if self.detailItem == nil {
+                    if isFirstViewDidAppear {
+                        cell.textField.becomeFirstResponder()
+                        isFirstViewDidAppear = false
+                    }
+                } else {
+                    cell.textField.userInteractionEnabled = false
                 }
-            } else {
-                cell.textField.userInteractionEnabled = false
+                return cell
+            }else {
+                let cell = tableView.dequeueReusableCellWithIdentifier("KeyValueCell", forIndexPath: indexPath) as KeyValueCell
+                cell.keyLabel.text = subject
+                cell.valueLabel.text = ddayString(detailItem!.valueForKey("date") as NSDate, toDate: NSDate())
+                return cell
             }
-            return cell
         case 1:
             if indexPath.row == 0 {
                 let cell = tableView.dequeueReusableCellWithIdentifier("DateValueCell", forIndexPath: indexPath) as KeyValueCell
@@ -224,7 +231,7 @@ class DdayViewController: UITableViewController, UITextViewDelegate, UITextField
                 }else if let event = eventArray.objectAtIndex(indexTarget) as? NSManagedObject {
                     timeGap = event.valueForKey("timeGap")!.doubleValue
                 }
-                cell.pickerView.selectRow(Int(timeGap/60/60/24)-1, inComponent: 0, animated: true)
+                cell.pickerView.selectRow(Int(timeGap/60/60/24)+10000, inComponent: 0, animated: true)
                 return cell
             }
             if indexTarget < eventArray.count {
@@ -239,7 +246,11 @@ class DdayViewController: UITableViewController, UITextViewDelegate, UITextField
                     timeGap = event.valueForKey("timeGap")!.doubleValue
                 }
                 cell.keyLabel.text = titleString
-                cell.valueLabel.text = "\(Int(timeGap/24/60/60))일"
+                
+                let fromDate = NSDate(timeInterval: timeGap, sinceDate: date as NSDate)
+                let toDate = NSDate()
+                cell.valueLabel.text = ddayString(fromDate, toDate: toDate)
+                
                 return cell
             }else{
                 let cell = tableView.dequeueReusableCellWithIdentifier("ButtonCell") as ButtonCell
@@ -327,6 +338,20 @@ class DdayViewController: UITableViewController, UITextViewDelegate, UITextField
             }
         }
     }
+    // MARK: - Function
+    func ddayString(fromDate:NSDate, toDate:NSDate) -> String {
+        let currnetCalendar = NSCalendar.currentCalendar()
+        let eventName = "D"
+        let todayDateComponents = currnetCalendar.components(NSCalendarUnit.DayCalendarUnit, fromDate: fromDate, toDate: toDate, options: NSCalendarOptions.allZeros)
+        if todayDateComponents.day == 0 {
+            return "D-Day!"
+        }else if todayDateComponents.day > 0 {
+            return "\(eventName)+\(todayDateComponents.day)"
+        } else {
+            return "\(eventName)\(todayDateComponents.day)"
+        }
+
+    }
     func hideDatePicker(){
         if let indexPath = openDateIndexPath{
             let hideIndexPath = datePickerIndexPath
@@ -396,14 +421,14 @@ class DdayViewController: UITableViewController, UITextViewDelegate, UITextField
     }
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if component == 0 {
-            return 10000
+            return 20000
         }else {
             return 1
         }
     }
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
         if component == 0 {
-            return "\(row+1)"
+            return "\(row-10000)"
         }else{
             return "Day"
         }
@@ -411,11 +436,14 @@ class DdayViewController: UITableViewController, UITextViewDelegate, UITextField
     
     // MARK: - UIPickerViewDelegate
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if targetEventIndex == nil {
+            return
+        }
         let object:AnyObject = self.eventArray.objectAtIndex(targetEventIndex!)
         if let managedObject = object as? NSManagedObject {
-            managedObject.setValue((row + 1)*60*60*24, forKey: "timeGap")
+            managedObject.setValue((row - 10000)*60*60*24, forKey: "timeGap")
         } else if let event = object as? Event {
-            event.timeGap = Double((row + 1)*60*60*24)
+            event.timeGap = Double((row - 10000)*60*60*24)
         }
         tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: targetEventIndex!, inSection: 2)], withRowAnimation: UITableViewRowAnimation.Fade)
     }
