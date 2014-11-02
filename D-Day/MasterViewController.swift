@@ -46,9 +46,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             object: UIApplication.sharedApplication().delegate
         )
     }
-    override func viewDidAppear(animated: Bool) {
-        performFetch()
-    }
     func reloadFetchedResults(note:NSNotification) {
     NSLog("Underlying data changed ... refreshing!")
         self.performFetch()
@@ -203,6 +200,26 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         self.tableView.beginUpdates()
     }
+    func setFetchedResultsController(newfrc:NSFetchedResultsController) {
+        let oldfrc:NSFetchedResultsController = self.fetchedResultsController
+        if newfrc != oldfrc {
+            _fetchedResultsController = newfrc
+            newfrc.delegate = self;
+            if (self.title != nil || self.title == oldfrc.fetchRequest.entity?.name?) && (self.navigationController != nil || self.navigationItem.title != nil) {
+                self.title = newfrc.fetchRequest.entity?.name?
+            }
+//            if newfrc != nil {
+//                if (self.debug) NSLog(@"[%@ %@] %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), oldfrc ? @"updated" : @"set");
+                performFetch()
+//            } else {
+//                if self.debug != nil {
+//                    NSLog("[%@ %@] reset to nil", NSStringFromClass(self.classForCoder), __FUNCTION__)
+//                }
+//                tableView.reloadData()
+//            }
+        }
+    }
+
 
     func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
         switch type {

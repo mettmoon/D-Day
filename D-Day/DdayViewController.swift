@@ -73,7 +73,7 @@ class DdayViewController: UITableViewController, UITextViewDelegate, UITextField
                 date = NSDate()
                 let addBarButton = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Bordered, target: self, action: "addButtonAction:")
                 self.navigationItem.setRightBarButtonItem(addBarButton, animated: false)
-                let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancelButtonActioewn:")
+                let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancelButtonAction:")
                 self.navigationItem.setLeftBarButtonItem(cancelButton, animated: false)
                 
             }
