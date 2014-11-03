@@ -88,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
             // ** Note: if you adapt this code for your own use, you MUST change this variable:
-            let iCloudEnabledAppID = "9YGS892Y3B.iCloud.WEJOApps.D-Day"
+            let iCloudEnabledAppID = "iCloud.WEJOApps.D-Day"
             
             // ** Note: if you adapt this code for your own use, you should change this variable:
             let dataFileName = "D_Day.sqlite"

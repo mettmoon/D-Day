@@ -207,6 +207,9 @@
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = 9YGS892Y3B;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
 							com.apple.Keychain = {
 								enabled = 1;
 							};

@@ -46,6 +46,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             object: UIApplication.sharedApplication().delegate
         )
     }
+    
     func reloadFetchedResults(note:NSNotification) {
     NSLog("Underlying data changed ... refreshing!")
         self.performFetch()
