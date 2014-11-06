@@ -49,6 +49,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     func reloadFetchedResults(note:NSNotification) {
     NSLog("Underlying data changed ... refreshing!")
+        self.managedObjectContext!.reset()
         self.performFetch()
     }
 
@@ -58,6 +59,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         if let error = error {
             NSLog("[%@ %@] %@ (%@)", NSStringFromClass(self.classForCoder), __FUNCTION__, error.localizedDescription, error.localizedFailureReason!)
         }
+        self.tableView.reloadData()
+
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

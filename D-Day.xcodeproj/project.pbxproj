@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BC8AAEE41A066300002B363E /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC8AAEE31A066300002B363E /* CloudKit.framework */; };
 		BCBA69021A04705200189A54 /* PickerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBA69011A04705200189A54 /* PickerViewCell.swift */; };
 		BCF288D21A03DB7A00898EC4 /* DDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF288D11A03DB7A00898EC4 /* DDayCell.swift */; };
 		BCF72D9B19FFB87500C29974 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF72D9A19FFB87500C29974 /* AppDelegate.swift */; };
@@ -24,6 +23,7 @@
 		BCF72E3919FFCAED00C29974 /* TextInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF72E3819FFCAED00C29974 /* TextInputCell.swift */; };
 		BCF72E3B19FFCAFB00C29974 /* TextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF72E3A19FFCAFB00C29974 /* TextViewCell.swift */; };
 		BCF72E3D19FFCB0800C29974 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF72E3C19FFCB0800C29974 /* ButtonCell.swift */; };
+		BCF891551A0BBBC40012E554 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCF891541A0BBBC40012E554 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +38,6 @@
 
 /* Begin PBXFileReference section */
 		BC8AAEE21A066120002B363E /* D-Day.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "D-Day.entitlements"; sourceTree = "<group>"; };
-		BC8AAEE31A066300002B363E /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		BCBA69011A04705200189A54 /* PickerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewCell.swift; sourceTree = "<group>"; };
 		BCF288D11A03DB7A00898EC4 /* DDayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDayCell.swift; sourceTree = "<group>"; };
 		BCF72D9519FFB87500C29974 /* D-Day.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "D-Day.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,6 +58,7 @@
 		BCF72E3819FFCAED00C29974 /* TextInputCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputCell.swift; sourceTree = "<group>"; };
 		BCF72E3A19FFCAFB00C29974 /* TextViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewCell.swift; sourceTree = "<group>"; };
 		BCF72E3C19FFCB0800C29974 /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
+		BCF891541A0BBBC40012E554 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC8AAEE41A066300002B363E /* CloudKit.framework in Frameworks */,
+				BCF891551A0BBBC40012E554 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,7 +83,7 @@
 		BCF72D8C19FFB87500C29974 = {
 			isa = PBXGroup;
 			children = (
-				BC8AAEE31A066300002B363E /* CloudKit.framework */,
+				BCF891541A0BBBC40012E554 /* CloudKit.framework */,
 				BCF72D9719FFB87500C29974 /* D-Day */,
 				BCF72DB219FFB87500C29974 /* D-DayTests */,
 				BCF72D9619FFB87500C29974 /* Products */,
