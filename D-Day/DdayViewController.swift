@@ -56,6 +56,10 @@ class DdayViewController: UITableViewController, UITextViewDelegate, UITextField
             cell.valueLabel.text = dateFormatter.stringFromDate(date)
         }
     }
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        view.endEditing(true)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         if managedObjectContext != nil {
