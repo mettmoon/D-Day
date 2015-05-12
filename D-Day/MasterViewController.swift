@@ -77,15 +77,15 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow() {
-            let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject
-                let controller = (segue.destinationViewController as UINavigationController).topViewController as DdayViewController
+            let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject
+                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DdayViewController
                 controller.detailItem = object
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
                 controller.navigationItem.leftItemsSupplementBackButton = true
                 controller.managedObjectContext = managedObjectContext
             }
         }else if segue.identifier == "addNewItem"{
-            let viewController = (segue.destinationViewController as UINavigationController).topViewController as DdayViewController
+            let viewController = (segue.destinationViewController as! UINavigationController).topViewController as! DdayViewController
             viewController.delegate = self
             viewController.managedObjectContext = managedObjectContext
         }
@@ -98,12 +98,12 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sectionInfo = self.fetchedResultsController.sections![section] as NSFetchedResultsSectionInfo
+        let sectionInfo = self.fetchedResultsController.sections![section] as! NSFetchedResultsSectionInfo
         return sectionInfo.numberOfObjects
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("DDayCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("DDayCell", forIndexPath: indexPath) as! UITableViewCell
         self.configureCell(cell, atIndexPath: indexPath)
         return cell
     }
@@ -116,7 +116,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             let context = self.fetchedResultsController.managedObjectContext
-            context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject)
+            context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject)
                 
             var error: NSError? = nil
             if !context.save(&error) {
@@ -132,18 +132,18 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
 
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-        let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject
+        let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject
         if let cell = cell as? DDayCell {
-            cell.titleLabel.text = object.valueForKey("title")? as? String
+            cell.titleLabel.text = object.valueForKey("title") as? String
             let currnetCalendar = NSCalendar.currentCalendar()
             
             var targetDate:NSDate
             var eventName = "D"
-            if let event = object.valueForKey("showEvent")? as? NSManagedObject {
-                eventName = event.valueForKey("title")? as String
-                targetDate = event.valueForKey("date")? as NSDate
+            if let event = object.valueForKey("showEvent") as? NSManagedObject {
+                eventName = event.valueForKey("title") as! String
+                targetDate = event.valueForKey("date") as! NSDate
             }else{
-                targetDate = object.valueForKey("date")? as NSDate
+                targetDate = object.valueForKey("date") as! NSDate
             }
             cell.dateLabel.text = stringFromDate(targetDate)
 
@@ -151,7 +151,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             let gap = targetDate.timeIntervalSinceDate(NSDate())
             let toDate = NSDate()
 
-            let todayDateComponents = currnetCalendar.components(NSCalendarUnit.DayCalendarUnit, fromDate: targetDate, toDate: toDate, options: NSCalendarOptions.allZeros)
+            let todayDateComponents = currnetCalendar.components(NSCalendarUnit.CalendarUnitDay, fromDate: targetDate, toDate: toDate, options: NSCalendarOptions.allZeros)
             if todayDateComponents.day == 0 {
                 cell.ddayLabel.text = "D-Day!"
             }else if todayDateComponents.day > 0 {
@@ -209,8 +209,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         if newfrc != oldfrc {
             _fetchedResultsController = newfrc
             newfrc.delegate = self;
-            if (self.title != nil || self.title == oldfrc.fetchRequest.entity?.name?) && (self.navigationController != nil || self.navigationItem.title != nil) {
-                self.title = newfrc.fetchRequest.entity?.name?
+            if (self.title != nil || self.title == oldfrc.fetchRequest.entity?.name) && (self.navigationController != nil || self.navigationItem.title != nil) {
+                self.title = newfrc.fetchRequest.entity?.name
             }
 //            if newfrc != nil {
 //                if (self.debug) NSLog(@"[%@ %@] %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), oldfrc ? @"updated" : @"set");

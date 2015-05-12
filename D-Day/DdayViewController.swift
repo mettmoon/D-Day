@@ -71,7 +71,7 @@ class DdayViewController: UITableViewController, UITextViewDelegate, UITextField
                 subject = managedObject.valueForKey("title") as? String
             }else{
                 date = NSDate()
-                let addBarButton = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Bordered, target: self, action: "addButtonAction:")
+                let addBarButton = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Plain, target: self, action: "addButtonAction:")
                 self.navigationItem.setRightBarButtonItem(addBarButton, animated: false)
                 let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancelButtonAction:")
                 self.navigationItem.setLeftBarButtonItem(cancelButton, animated: false)
@@ -175,7 +175,7 @@ class DdayViewController: UITableViewController, UITextViewDelegate, UITextField
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if let datePickerIndexPath = datePickerIndexPath {
             if(indexPath.compare(datePickerIndexPath) == .OrderedSame){
-                let cell = tableView.dequeueReusableCellWithIdentifier("DatePickerCell", forIndexPath: indexPath) as DatePickerCell
+                let cell = tableView.dequeueReusableCellWithIdentifier("DatePickerCell", forIndexPath: indexPath) as! DatePickerCell
                 cell.datePicker.addTarget(self, action: "datePickerValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
                 cell.datePicker.date = date
                 cell.datePicker.datePickerMode = .Date
@@ -186,9 +186,9 @@ class DdayViewController: UITableViewController, UITextViewDelegate, UITextField
         switch indexPath.section {
         case 0:
             if detailItem == nil {
-                let cell = tableView.dequeueReusableCellWithIdentifier("TextInputCell", forIndexPath: indexPath) as TextInputCell
+                let cell = tableView.dequeueReusableCellWithIdentifier("TextInputCell", forIndexPath: indexPath) as! TextInputCell
                 cell.textField.placeholder = "Subject"
-                cell.textField.text = subject
+                cell.textField.text = subject as? String
                 cell.textField.delegate = self
                 cell.textField.returnKeyType = .Done
                 if self.detailItem == nil {
@@ -201,14 +201,14 @@ class DdayViewController: UITableViewController, UITextViewDelegate, UITextField
                 }
                 return cell
             }else {
-                let cell = tableView.dequeueReusableCellWithIdentifier("KeyValueCell", forIndexPath: indexPath) as KeyValueCell
-                cell.keyLabel.text = subject
-                cell.valueLabel.text = ddayString(detailItem!.valueForKey("date") as NSDate, toDate: NSDate())
+                let cell = tableView.dequeueReusableCellWithIdentifier("KeyValueCell", forIndexPath: indexPath) as! KeyValueCell
+                cell.keyLabel.text = subject as? String
+                cell.valueLabel.text = ddayString(detailItem!.valueForKey("date") as! NSDate, toDate: NSDate())
                 return cell
             }
         case 1:
             if indexPath.row == 0 {
-                let cell = tableView.dequeueReusableCellWithIdentifier("DateValueCell", forIndexPath: indexPath) as KeyValueCell
+                let cell = tableView.dequeueReusableCellWithIdentifier("DateValueCell", forIndexPath: indexPath) as! KeyValueCell
                 cell.keyLabel.text = "D-Day"
                 cell.valueLabel.text = dateFormatter.stringFromDate(date)
                 return cell
@@ -221,7 +221,7 @@ class DdayViewController: UITableViewController, UITextViewDelegate, UITextField
                 indexTarget--
             }
             if targetEventIndex != nil && targetEventIndex!+1 == indexPath.row {
-                let cell = tableView.dequeueReusableCellWithIdentifier("PickerViewCell", forIndexPath: indexPath) as PickerViewCell
+                let cell = tableView.dequeueReusableCellWithIdentifier("PickerViewCell", forIndexPath: indexPath) as! PickerViewCell
                 cell.pickerView.delegate = self
                 cell.pickerView.dataSource = self
 
@@ -235,14 +235,16 @@ class DdayViewController: UITableViewController, UITextViewDelegate, UITextField
                 return cell
             }
             if indexTarget < eventArray.count {
-                let cell = tableView.dequeueReusableCellWithIdentifier("KeyValueCell", forIndexPath: indexPath) as KeyValueCell
+                let cell = tableView.dequeueReusableCellWithIdentifier("KeyValueCell", forIndexPath: indexPath) as! KeyValueCell
                 var timeGap:NSTimeInterval = 0
                 var titleString:String = ""
                 if let event = eventArray.objectAtIndex(indexTarget) as? Event {
                     titleString = event.title
                     timeGap = event.timeGap
                 }else if let event = eventArray.objectAtIndex(indexTarget) as? NSManagedObject {
-                    titleString = event.valueForKey("title")! as String
+                    if let title = event.valueForKey("title") as? String {
+                        titleString = title
+                    }
                     timeGap = event.valueForKey("timeGap")!.doubleValue
                 }
                 cell.keyLabel.text = titleString
@@ -253,14 +255,14 @@ class DdayViewController: UITableViewController, UITextViewDelegate, UITextField
                 
                 return cell
             }else{
-                let cell = tableView.dequeueReusableCellWithIdentifier("ButtonCell") as ButtonCell
+                let cell = tableView.dequeueReusableCellWithIdentifier("ButtonCell") as! ButtonCell
                 cell.buttonLabel.text = "Add Event.."
                 cell.buttonLabel.textColor = tableView.tintColor
                 return cell
             }
         case 3:
-            let cell = tableView.dequeueReusableCellWithIdentifier("TextViewCell", forIndexPath: indexPath) as TextViewCell
-            cell.textView.text = memo
+            let cell = tableView.dequeueReusableCellWithIdentifier("TextViewCell", forIndexPath: indexPath) as! TextViewCell
+            cell.textView.text = memo as? String
             cell.keyLabel.text = "Memo"
             cell.textView.delegate = self
             return cell
@@ -342,7 +344,7 @@ class DdayViewController: UITableViewController, UITextViewDelegate, UITextField
     func ddayString(fromDate:NSDate, toDate:NSDate) -> String {
         let currnetCalendar = NSCalendar.currentCalendar()
         let eventName = "D"
-        let todayDateComponents = currnetCalendar.components(NSCalendarUnit.DayCalendarUnit, fromDate: fromDate, toDate: toDate, options: NSCalendarOptions.allZeros)
+        let todayDateComponents = currnetCalendar.components(NSCalendarUnit.CalendarUnitDay, fromDate: fromDate, toDate: toDate, options: NSCalendarOptions.allZeros)
         if todayDateComponents.day == 0 {
             return "D-Day!"
         }else if todayDateComponents.day > 0 {
@@ -370,14 +372,14 @@ class DdayViewController: UITableViewController, UITextViewDelegate, UITextField
             NSLog("managedObjectText가 없음")
             return
         }
-        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName("DDay", inManagedObjectContext: managedObjectContext!) as NSManagedObject
+        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName("DDay", inManagedObjectContext: managedObjectContext!)as! NSManagedObject
         newManagedObject.setValue(date, forKey: "date")
         newManagedObject.setValue(subject, forKey: "title")
         newManagedObject.setValue(memo, forKey: "memo")
         let events = newManagedObject.mutableSetValueForKey("event")
         for event in eventArray {
             if let event = event as? Event {
-                let newEventManagedObject = NSEntityDescription.insertNewObjectForEntityForName("Event", inManagedObjectContext: managedObjectContext!) as NSManagedObject
+                let newEventManagedObject = NSEntityDescription.insertNewObjectForEntityForName("Event", inManagedObjectContext: managedObjectContext!) as!NSManagedObject
                 newEventManagedObject.setValue(event.title, forKey: "title" )
                 newEventManagedObject.setValue(event.timeGap, forKey: "timeGap" )
                 events.addObject(newEventManagedObject)
@@ -457,7 +459,7 @@ class DdayViewController: UITableViewController, UITextViewDelegate, UITextField
                     tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: targetEventIndex!+1, inSection: 2)], withRowAnimation: .Fade)
                 }
                 if let item = detailItem {
-                    let managedObject = NSEntityDescription.insertNewObjectForEntityForName("Event", inManagedObjectContext: managedObjectContext!) as NSManagedObject
+                    let managedObject = NSEntityDescription.insertNewObjectForEntityForName("Event", inManagedObjectContext: managedObjectContext!) as! NSManagedObject
                     managedObject.setValue(alertView.textFieldAtIndex(0)!.text, forKey: "title")
                     managedObject.setValue(1*60*60*24, forKey: "timeGap")
                     eventArray.addObject(managedObject)

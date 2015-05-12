@@ -17,13 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        let splitViewController = self.window!.rootViewController as UISplitViewController
-        let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as UINavigationController
+        let splitViewController = self.window!.rootViewController as! UISplitViewController
+        let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
         navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
         splitViewController.delegate = self
 
-        let masterNavigationController = splitViewController.viewControllers[0] as UINavigationController
-        let controller = masterNavigationController.topViewController as MasterViewController
+        let masterNavigationController = splitViewController.viewControllers[0] as! UINavigationController
+        let controller = masterNavigationController.topViewController as! MasterViewController
         controller.managedObjectContext = self.managedObjectContext
         return true
     }
@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     lazy var applicationDocumentsDirectory: NSURL = {
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        return urls[urls.count-1] as NSURL
+        return urls[urls.count-1] as! NSURL
     }()
 
     lazy var managedObjectModel: NSManagedObjectModel = {
@@ -121,7 +121,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                 options.setObject(iCloudEnabledAppID, forKey: NSPersistentStoreUbiquitousContentNameKey)
                 options.setObject(iCloudLogsPath, forKey: NSPersistentStoreUbiquitousContentURLKey)
                 coordinator?.performBlockAndWait({ () -> Void in
-                    coordinator?.addPersistentStoreWithType(NSSQLiteStoreType, configuration:nil, URL:NSURL(fileURLWithPath:iCloudData), options:options, error:nil)
+                    coordinator?.addPersistentStoreWithType(NSSQLiteStoreType, configuration:nil, URL:NSURL(fileURLWithPath:iCloudData), options:options as [NSObject : AnyObject], error:nil)
                     return
                 })
             }
@@ -133,7 +133,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                 
                 coordinator?.lock()
                 
-                coordinator?.addPersistentStoreWithType(NSSQLiteStoreType, configuration:nil, URL:localStore, options:options, error:nil)
+                coordinator?.addPersistentStoreWithType(NSSQLiteStoreType, configuration:nil, URL:localStore, options:options as [NSObject : AnyObject], error:nil)
                 coordinator?.unlock()
                 
             }
