@@ -19,9 +19,20 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
             self.clearsSelectionOnViewWillAppear = false
             self.preferredContentSize = CGSize(width: 320.0, height: 600.0)
+        }else{
+            self.clearsSelectionOnViewWillAppear = true
         }
     }
-
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+        }else{
+            if let indexPath = self.tableView.indexPathForSelectedRow(){
+                self.tableView.deselectRowAtIndexPath(indexPath, animated: animated)
+            }
+        }
+        
+    }
     func stringFromDate(date:NSDate) -> String{
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy. MM. dd."
@@ -29,7 +40,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        clearsSelectionOnViewWillAppear = true
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
 
