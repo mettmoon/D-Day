@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC767B731B024724001F27B4 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC767B721B024724001F27B4 /* NotificationCenter.framework */; };
+		BC767B781B024724001F27B4 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC767B771B024724001F27B4 /* TodayViewController.swift */; };
+		BC767B7A1B024724001F27B4 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC767B791B024724001F27B4 /* MainInterface.storyboard */; };
+		BC767B7D1B024724001F27B4 /* SummaryWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BC767B701B024724001F27B4 /* SummaryWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BC85B8B61B024A1C0085AED0 /* D_Day.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BCF72D9C19FFB87500C29974 /* D_Day.xcdatamodeld */; };
 		BCBA69021A04705200189A54 /* PickerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBA69011A04705200189A54 /* PickerViewCell.swift */; };
 		BCF288D21A03DB7A00898EC4 /* DDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF288D11A03DB7A00898EC4 /* DDayCell.swift */; };
 		BCF72D9B19FFB87500C29974 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF72D9A19FFB87500C29974 /* AppDelegate.swift */; };
@@ -27,6 +32,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		BC767B7B1B024724001F27B4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BCF72D8D19FFB87500C29974 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BC767B6F1B024724001F27B4;
+			remoteInfo = SummaryWidget;
+		};
 		BCF72DB019FFB87500C29974 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BCF72D8D19FFB87500C29974 /* Project object */;
@@ -36,7 +48,27 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		BC767B811B024724001F27B4 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				BC767B7D1B024724001F27B4 /* SummaryWidget.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		BC767B701B024724001F27B4 /* SummaryWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SummaryWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC767B721B024724001F27B4 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		BC767B761B024724001F27B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BC767B771B024724001F27B4 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		BC767B791B024724001F27B4 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
+		BC85B8B71B024D0C0085AED0 /* SummaryWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SummaryWidget.entitlements; sourceTree = "<group>"; };
 		BC8AAEE21A066120002B363E /* D-Day.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "D-Day.entitlements"; sourceTree = "<group>"; };
 		BCBA69011A04705200189A54 /* PickerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewCell.swift; sourceTree = "<group>"; };
 		BCF288D11A03DB7A00898EC4 /* DDayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDayCell.swift; sourceTree = "<group>"; };
@@ -62,6 +94,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		BC767B6D1B024724001F27B4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC767B731B024724001F27B4 /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BCF72D9219FFB87500C29974 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -80,12 +120,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BC767B711B024724001F27B4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BC767B721B024724001F27B4 /* NotificationCenter.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BC767B741B024724001F27B4 /* SummaryWidget */ = {
+			isa = PBXGroup;
+			children = (
+				BC85B8B71B024D0C0085AED0 /* SummaryWidget.entitlements */,
+				BC767B771B024724001F27B4 /* TodayViewController.swift */,
+				BC767B791B024724001F27B4 /* MainInterface.storyboard */,
+				BC767B751B024724001F27B4 /* Supporting Files */,
+			);
+			path = SummaryWidget;
+			sourceTree = "<group>";
+		};
+		BC767B751B024724001F27B4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BC767B761B024724001F27B4 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		BCF72D8C19FFB87500C29974 = {
 			isa = PBXGroup;
 			children = (
 				BCF891541A0BBBC40012E554 /* CloudKit.framework */,
 				BCF72D9719FFB87500C29974 /* D-Day */,
 				BCF72DB219FFB87500C29974 /* D-DayTests */,
+				BC767B741B024724001F27B4 /* SummaryWidget */,
+				BC767B711B024724001F27B4 /* Frameworks */,
 				BCF72D9619FFB87500C29974 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -95,6 +164,7 @@
 			children = (
 				BCF72D9519FFB87500C29974 /* D-Day.app */,
 				BCF72DAF19FFB87500C29974 /* D-DayTests.xctest */,
+				BC767B701B024724001F27B4 /* SummaryWidget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -159,6 +229,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		BC767B6F1B024724001F27B4 /* SummaryWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BC767B801B024724001F27B4 /* Build configuration list for PBXNativeTarget "SummaryWidget" */;
+			buildPhases = (
+				BC767B6C1B024724001F27B4 /* Sources */,
+				BC767B6D1B024724001F27B4 /* Frameworks */,
+				BC767B6E1B024724001F27B4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SummaryWidget;
+			productName = SummaryWidget;
+			productReference = BC767B701B024724001F27B4 /* SummaryWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		BCF72D9419FFB87500C29974 /* D-Day */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BCF72DB919FFB87500C29974 /* Build configuration list for PBXNativeTarget "D-Day" */;
@@ -166,10 +253,12 @@
 				BCF72D9119FFB87500C29974 /* Sources */,
 				BCF72D9219FFB87500C29974 /* Frameworks */,
 				BCF72D9319FFB87500C29974 /* Resources */,
+				BC767B811B024724001F27B4 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				BC767B7C1B024724001F27B4 /* PBXTargetDependency */,
 			);
 			name = "D-Day";
 			productName = "D-Day";
@@ -203,10 +292,22 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = Hayden;
 				TargetAttributes = {
+					BC767B6F1B024724001F27B4 = {
+						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 9YGS892Y3B;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
 					BCF72D9419FFB87500C29974 = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = 9YGS892Y3B;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
 							com.apple.BackgroundModes = {
 								enabled = 0;
 							};
@@ -239,11 +340,20 @@
 			targets = (
 				BCF72D9419FFB87500C29974 /* D-Day */,
 				BCF72DAE19FFB87500C29974 /* D-DayTests */,
+				BC767B6F1B024724001F27B4 /* SummaryWidget */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		BC767B6E1B024724001F27B4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC767B7A1B024724001F27B4 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BCF72D9319FFB87500C29974 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -264,6 +374,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		BC767B6C1B024724001F27B4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC767B781B024724001F27B4 /* TodayViewController.swift in Sources */,
+				BC85B8B61B024A1C0085AED0 /* D_Day.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BCF72D9119FFB87500C29974 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -294,6 +413,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		BC767B7C1B024724001F27B4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BC767B6F1B024724001F27B4 /* SummaryWidget */;
+			targetProxy = BC767B7B1B024724001F27B4 /* PBXContainerItemProxy */;
+		};
 		BCF72DB119FFB87500C29974 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = BCF72D9419FFB87500C29974 /* D-Day */;
@@ -321,6 +445,45 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		BC767B7E1B024724001F27B4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = SummaryWidget/SummaryWidget.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SummaryWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		BC767B7F1B024724001F27B4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = SummaryWidget/SummaryWidget.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = SummaryWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		BCF72DB719FFB87500C29974 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -418,8 +581,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "D-Day/D-Day.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "D-Day/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -465,6 +628,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		BC767B801B024724001F27B4 /* Build configuration list for PBXNativeTarget "SummaryWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BC767B7E1B024724001F27B4 /* Debug */,
+				BC767B7F1B024724001F27B4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		BCF72D9019FFB87500C29974 /* Build configuration list for PBXProject "D-Day" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

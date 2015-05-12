@@ -68,8 +68,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     // MARK: - Core Data stack
 
     lazy var applicationDocumentsDirectory: NSURL = {
-        let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        return urls[urls.count-1] as! NSURL
+        let urls = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier("group.WEJOApps.D-Day")
+        return urls!
     }()
 
     lazy var managedObjectModel: NSManagedObjectModel = {
